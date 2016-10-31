@@ -1,0 +1,27 @@
+{
+  "name": "ts-validation",
+  "version": "1.0.0",
+  "description": "TypeScript model validation using class decorators ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sebandres/ts-validation.git"
+  },
+  "keywords": [
+    "typescript",
+    "jest",
+    "decorators",
+    "validation",
+    "decorator",
+    "javascript"
+  ],
+  "author": "Sebastian Paulo Andres <sebandres@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sebandres/ts-validation/issues"
+  },
+  "homepage": "https://github.com/sebandres/ts-validation#readme"
+}
