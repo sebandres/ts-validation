@@ -24,6 +24,15 @@ var UserWithCustomMessage = (function () {
     ], UserWithCustomMessage.prototype, "email", void 0);
     return UserWithCustomMessage;
 }());
+var UserWithRegularExpression = (function () {
+    function UserWithRegularExpression() {
+    }
+    __decorate([
+        Validation.RegEx(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/),
+        Validation.Required()
+    ], UserWithRegularExpression.prototype, "email", void 0);
+    return UserWithRegularExpression;
+}());
 describe('Validation for Required Property', function () {
     it('Should return an error item when object is not passed in', function () {
         var user = new User();
@@ -42,6 +51,14 @@ describe('Validation for Email', function () {
 });
 describe('Validation for Email with Custom Message', function () {
     it('Should return a custom error message item when object is not a proper email', function () {
+        var user = new UserWithCustomMessage();
+        var errors = Validation.Validator.Validate(user);
+        expect(errors.length).toBe(1);
+        expect(errors[0].message).toBe('The email field cannot be empty');
+    });
+});
+describe('Validation for Email with Custom RegEx', function () {
+    it('Should return an error message item when object is not a proper email', function () {
         var user = new UserWithCustomMessage();
         var errors = Validation.Validator.Validate(user);
         expect(errors.length).toBe(1);
