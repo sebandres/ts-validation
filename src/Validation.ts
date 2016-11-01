@@ -1,5 +1,23 @@
 const ValidatorTag: string = 'Validators'
 
+export function Custom(fun: { (target: any, propertyKey: string): boolean }, errorMessage: string) {
+    return function (target: any, propertyKey: string) {
+        if (target[ValidatorTag] == null)
+            target[ValidatorTag] = new Object()
+
+        if (target[ValidatorTag][propertyKey] == null)
+            target[ValidatorTag][propertyKey] = new Array<any>()
+
+        target[ValidatorTag][propertyKey].push((value, propertyKey) => {
+            let result: boolean = fun(value, propertyKey)
+            if (result)
+                return null
+            else
+                return errorMessage
+        })
+    }
+}
+
 export function RegEx(regEx: RegExp, errorMessage: string = null) {
     return function (target: any, propertyKey: string) {
         let message: string = `${propertyKey} is not valid`
