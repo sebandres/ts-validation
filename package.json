@@ -1,6 +1,6 @@
 {
   "name": "ts-validation",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "TypeScript model validation using class decorators ",
   "main": "index.js",
   "scripts": {
