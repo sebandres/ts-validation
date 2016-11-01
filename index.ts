@@ -1,1 +1,2 @@
-import * as Validation from './src/Validation' 
+export * from './src/Validation'
+
