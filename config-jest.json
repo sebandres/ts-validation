@@ -1,0 +1,6 @@
+{
+    "testPathDirs": [
+        "./"
+    ],
+    "testRegex": "__tests__/.*$"
+}
