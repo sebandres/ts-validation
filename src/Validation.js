@@ -1,5 +1,21 @@
 "use strict";
 var ValidatorTag = 'Validators';
+function Custom(fun, errorMessage) {
+    return function (target, propertyKey) {
+        if (target[ValidatorTag] == null)
+            target[ValidatorTag] = new Object();
+        if (target[ValidatorTag][propertyKey] == null)
+            target[ValidatorTag][propertyKey] = new Array();
+        target[ValidatorTag][propertyKey].push(function (value, propertyKey) {
+            var result = fun(value, propertyKey);
+            if (result)
+                return null;
+            else
+                return errorMessage;
+        });
+    };
+}
+exports.Custom = Custom;
 function RegEx(regEx, errorMessage) {
     if (errorMessage === void 0) { errorMessage = null; }
     return function (target, propertyKey) {

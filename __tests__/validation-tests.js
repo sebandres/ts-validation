@@ -33,6 +33,20 @@ var UserWithRegularExpression = (function () {
     ], UserWithRegularExpression.prototype, "email", void 0);
     return UserWithRegularExpression;
 }());
+function CustomValidation(value, propertyKey) {
+    var valid = false;
+    if (value.substr(0, 3) == 'Seb')
+        valid = true;
+    return valid;
+}
+var UserWithCustomValidation = (function () {
+    function UserWithCustomValidation() {
+    }
+    __decorate([
+        Validation.Custom(CustomValidation, 'Value of Name does not start with "Seb"!')
+    ], UserWithCustomValidation.prototype, "name", void 0);
+    return UserWithCustomValidation;
+}());
 describe('Validation for Required Property', function () {
     it('Should return an error item when object is not passed in', function () {
         var user = new User();
@@ -63,6 +77,23 @@ describe('Validation for Email with Custom RegEx', function () {
         var errors = Validation.Validator.Validate(user);
         expect(errors.length).toBe(1);
         expect(errors[0].message).toBe('The email field cannot be empty');
+    });
+});
+describe('Validation for Name with Custom Logic', function () {
+    it('Should return an error message item when name does not start with "Seb"', function () {
+        var user = new UserWithCustomValidation();
+        user.name = 'Carlos';
+        var errors = Validation.Validator.Validate(user);
+        expect(errors.length).toBe(1);
+        expect(errors[0].message).toBe('Value of Name does not start with "Seb"!');
+    });
+});
+describe('Validation for Name with Custom Logic', function () {
+    it('Should NOT return an error message item when name starts with "Seb"', function () {
+        var user = new UserWithCustomValidation();
+        user.name = 'Sebastian';
+        var errors = Validation.Validator.Validate(user);
+        expect(errors.length).toBe(0);
     });
 });
 //# sourceMappingURL=validation-tests.js.map
