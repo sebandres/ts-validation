@@ -1,3 +1,9 @@
 {
-    
+    "compilerOptions": {
+        "sourceMap": true,
+        "module": "commonjs",
+        "experimentalDecorators": true,
+        "target": "es5",
+        "watch": true
+    }
 }
