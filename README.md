@@ -20,9 +20,8 @@ let user = new User()
 let errors = Validation.Validator.Validate(user)
 ```
 
-Validation Supported:
-
--Required
--Email
--Custom Regular Expression
--Custom Validation Function
+## Validation Supported
+- Required
+- Email
+- Custom Regular Expression
+- Custom Validation Function
