@@ -1,5 +1,25 @@
 "use strict";
 var ValidatorTag = 'Validators';
+function RegEx(regEx, errorMessage) {
+    if (errorMessage === void 0) { errorMessage = null; }
+    return function (target, propertyKey) {
+        var message = propertyKey + " is not valid";
+        if (errorMessage != null)
+            message = errorMessage;
+        if (target[ValidatorTag] == null)
+            target[ValidatorTag] = new Object();
+        if (target[ValidatorTag][propertyKey] == null)
+            target[ValidatorTag][propertyKey] = new Array();
+        target[ValidatorTag][propertyKey].push(function (value, propertyKey) {
+            var re = regEx;
+            if (re.test(value))
+                return null;
+            else
+                return message;
+        });
+    };
+}
+exports.RegEx = RegEx;
 function Email(errorMessage) {
     if (errorMessage === void 0) { errorMessage = null; }
     return function (target, propertyKey) {

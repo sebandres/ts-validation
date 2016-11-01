@@ -1,5 +1,27 @@
 const ValidatorTag: string = 'Validators'
 
+export function RegEx(regEx: RegExp, errorMessage: string = null) {
+    return function (target: any, propertyKey: string) {
+        let message: string = `${propertyKey} is not valid`
+        if (errorMessage != null)
+            message = errorMessage
+
+        if (target[ValidatorTag] == null)
+            target[ValidatorTag] = new Object()
+
+        if (target[ValidatorTag][propertyKey] == null)
+            target[ValidatorTag][propertyKey] = new Array<any>()
+
+        target[ValidatorTag][propertyKey].push((value, propertyKey) => {
+            let re = regEx
+            if (re.test(value))
+                return null
+            else
+                return message
+        })
+    }
+}
+
 export function Email(errorMessage: string = null) {
     return function (target: any, propertyKey: string) {
         let message: string = `${propertyKey} is not a valid email address`
@@ -13,7 +35,7 @@ export function Email(errorMessage: string = null) {
             target[ValidatorTag][propertyKey] = new Array<any>()
 
         target[ValidatorTag][propertyKey].push((value, propertyKey) => {
-            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
             if (re.test(value))
                 return null
             else
