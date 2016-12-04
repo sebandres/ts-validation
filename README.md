@@ -1,3 +1,9 @@
+
+# THIS PROJECT HAS MOVED TO GITLAB!
+
+https://gitlab.com/sebandres/ts-validation
+
+
 # ts-validation
 A validation library that makes use of the proposed es7 decorators to configure validation on a model level for our classes.
 
